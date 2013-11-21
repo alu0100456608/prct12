@@ -26,7 +26,7 @@ module Practica9
    def == (other)
       @filas.times do |i|
          @columnas.times do |j|
-            if @elementos[i][j] != other.at(i,j)
+            if at(i,j) != other.at(i,j)
                return false
             end
          end
