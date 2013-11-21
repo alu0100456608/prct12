@@ -189,7 +189,7 @@ module Practica9
          elsif other.class == MatrizDispersa
             new_mat = @elementos.merge(other.elementos) do |clave, oldval, newval| 
                oldval.merge(newval) do |clave2, oldval2, newval2|
-                  oldval2 - newval2
+                  newval2 - oldval2
                end
             end
             MatrizDispersa.new(@filas, @columnas, new_mat)
