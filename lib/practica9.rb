@@ -22,10 +22,17 @@ module Practica9
          tmp
       end
       
-      #Sobrecarga del operador == 
-      def == (other)
-         return @elementos == other.elementos
+   #Sobrecarga del operador == 
+   def == (other)
+      @filas.times do |i|
+         @columnas.times do |j|
+            if @elementos[i][j] != other.at(i,j)
+               return false
+            end
+         end
       end
+      
+      return true
    end
 
    class MatrizDensa < Matriz
@@ -100,7 +107,9 @@ module Practica9
          mayor = @elementos[0][0]
          @columnas.times do |i|
             @filas.times do |j|
-               mayor = @elementos[i][j] if @elementos[i][j] > mayor
+               if @elementos[i][j] > mayor
+                  mayor = @elementos[i][j]
+               end
             end
          end
          mayor
@@ -110,7 +119,9 @@ module Practica9
          menor = @elementos[0][0]
          @columnas.times do |i|
             @filas.times do |j|
-               menor = @elementos[i][j] if @elementos[i][j] < menor
+               if @elementos[i][j] < menor
+                  menor = @elementos[i][j]
+               end
             end
          end
          menor
