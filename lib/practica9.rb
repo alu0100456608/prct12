@@ -21,18 +21,6 @@ module Practica9
          end
          tmp
       end
-      
-   #Sobrecarga del operador == 
-   def == (other)
-      @filas.times do |i|
-         @columnas.times do |j|
-            if at(i,j) != other.at(i,j)
-               return false
-            end
-         end
-      end
-      
-      return true
    end
 
    class MatrizDensa < Matriz
@@ -59,6 +47,19 @@ module Practica9
          end
          MatrizDensa.new(@columnas, @filas, new_mat)
       end
+      
+   #Sobrecarga del operador == 
+   def == (other)
+      @filas.times do |i|
+         @columnas.times do |j|
+            if at(i, j) != other.at(i,j)
+               return false
+            end
+         end
+      end
+      
+      return true
+   end
 
       def +(other)
          raise ArgumentError, "Las dimensiones de las matrices no coinciden" unless @filas == other.filas && @columnas == other.columnas
@@ -107,9 +108,7 @@ module Practica9
          mayor = @elementos[0][0]
          @columnas.times do |i|
             @filas.times do |j|
-               if @elementos[i][j] > mayor
-                  mayor = @elementos[i][j]
-               end
+               mayor = @elementos[i][j] if @elementos[i][j] > mayor
             end
          end
          mayor
@@ -119,9 +118,7 @@ module Practica9
          menor = @elementos[0][0]
          @columnas.times do |i|
             @filas.times do |j|
-               if @elementos[i][j] < menor
-                  menor = @elementos[i][j]
-               end
+               menor = @elementos[i][j] if @elementos[i][j] < menor
             end
          end
          menor
