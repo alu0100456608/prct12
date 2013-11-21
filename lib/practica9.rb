@@ -21,6 +21,19 @@ module Practica9
          end
          tmp
       end
+      
+      #Sobrecarga del operador == 
+      def == (other)
+         @filas.times do |i|
+            @columnas.times do |j|
+               if at(i, j) != other.at(i,j)
+                  return false
+               end
+            end
+         end
+         
+         return true
+      end
    end
 
    class MatrizDensa < Matriz
@@ -338,10 +351,13 @@ include Practica9
    m1=MatrizDensa.new(2,2,[[3,4],[5,6]])
    m2=MatrizDispersa.new(2,2,{1=>{0=>Fraccion.new(1,2)}})
    
+   puts "m1"
    puts m1.to_s
    puts
+   puts "m2"
    puts m2.to_s
    puts
-   puts (m2*m1).to_s
+   puts "m1+m2"
+   puts (m1+m2).to_s
    
 end
