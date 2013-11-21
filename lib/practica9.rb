@@ -24,15 +24,7 @@ module Practica9
       
       #Sobrecarga del operador == 
       def == (other)
-         @filas.times do |i|
-            @columnas.times do |j|
-               if at(i, j) != other.at(i,j)
-                  return false
-               end
-            end
-         end
-         
-         return true
+         return @elementos == other.elementos
       end
    end
 
