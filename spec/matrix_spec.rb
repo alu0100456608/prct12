@@ -1,11 +1,10 @@
 require "./lib/practica9.rb"
+include Practica9
 
-
-describe Matriz do
-  
+describe "Matriz" do
    before :each do
       @f1 = MatrizDensa.new(3,2,[[1,2],[3,4],[5,6]])
-      @f2 = MatrizDispersa.new(10,10{0=>{1 => 5, 3=>6}})
+      @f2 = MatrizDispersa.new(10,10,{0=>{1 => 5, 3=>6}})
       @f3 = MatrizDensa.new(10,10,[[0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
@@ -44,12 +43,12 @@ describe Matriz do
    describe "Operaciones con dos matrices densas" do
       it "La suma de matrices se realiza correctamente" do
          f = MatrizDensa.new(3,2,[[1,1],[2,2],[3,3]])
-         (@f1 + f).should eq (MatrizDensa.new([[2,3],[5,6],[8,9]]))
+         (@f1 + f).should eq (MatrizDensa.new(3,2,[[2,3],[5,6],[8,9]]))
          end
          
          it "La resta de matrices se realiza correctamente" do
          f = MatrizDensa.new(3,2,[[1,1],[2,2],[3,3]])
-         (@f1 - f).should eq (MatrizDensa.new([[0,1],[1,2],[2,3]]))
+         (@f1 - f).should eq (MatrizDensa.new(3,2,[[0,1],[1,2],[2,3]]))
          end
          it "El producto de matrices se realiza correctamente" do
          a = MatrizDensa.new(3,3,[[2,0,1],[3,0,0],[5,1,1]])
@@ -57,8 +56,8 @@ describe Matriz do
          (a * b).should eq (MatrizDensa.new(3,3,[[3,1,2],[3,0,3],[7,3,6]]))
       end
    end
-   describe "Máximo y minimo de una matriz densa" do
-      it"El máximo de una matriz densa se realiza correctamente" do
+   describe "Maximo y minimo de una matriz densa" do
+      it"El maximo de una matriz densa se realiza correctamente" do
         @f1.maximo.should eq (6)
       end
       it"El minimo de una matriz densa se realiza correctamente" do
@@ -79,35 +78,35 @@ describe Matriz do
    
    describe "Igualdad entre matrices dispersas " do
       it "Las matrices han de ser iguales" do
-      f = MatrizDispersa.new(10,10{0=>{1=>5, 3=>6}})
+      f = MatrizDispersa.new(10,10,{0=>{1=>5, 3=>6}})
       (@f2 == f).should be_true;
       end
    end
    
    describe "Transformacion de una matriz dispersa" do
       it "Matriz dispersa traspuesta" do
-      f = MatrizDispersa.new(10,10, {1=>{0=>5}, 3=>{0=>6}})
-      (@f1.traspuesta == f).should be_true;
+	f = MatrizDispersa.new(10,10, {1=>{0=>5}, 3=>{0=>6}})
+      (@f2.traspuesta == f).should be_true;
       end
    end
 
    describe "Operaciones con dos matrices dispersas" do
       it "La suma de matrices se realiza correctamente" do
          f = MatrizDispersa.new(10,10, {0=>{1=>2,5=>6}, 4=>{5=>2}})
-         (@f1 + f).should eq (MatrizDispersa.new(10, 10, {0=>{1=>7,3=>6,5=>6},4=>{5=>2}}))
+         (@f2 + f).should eq (MatrizDispersa.new(10, 10, {0=>{1=>7,3=>6,5=>6},4=>{5=>2}}))
          end
          
          it "La resta de matrices dispersas se realiza correctamente" do
          f = MatrizDispersa.new(10,10, {0=>{1=>2,5=>6}, 4=>{5=>2}})
-	 (@f1 - f).should eq (MatrizDispersa.new(10, 10, {0=>{1=>3,3=>6,5=>-6},4=>{5=>-2}}))
+	 (@f2 - f).should eq (MatrizDispersa.new(10, 10, {0=>{1=>3,3=>6,5=>-6},4=>{5=>-2}}))
          end
          it "El producto de matrices dispersas se realiza correctamente" do
          f = MatrizDispersa.new(10,10, {0=>{1=>2,5=>6}, 4=>{5=>2}})
-         (f1 * f).should eq (MatrizDispersa.new(10,10,{}))
+         (@f2 * f).should eq (MatrizDispersa.new(10,10,{}))
       end
    end
-   describe "Máximo y minimo de una matriz dispersa" do
-      it"El máximo de una matriz dispersa se realiza correctamente" do
+   describe "Maximo y minimo de una matriz dispersa" do
+      it"El maximo de una matriz dispersa se realiza correctamente" do
         @f2.max.should eq (6)
       end
       it"El minimo de una matriz dispersa se realiza correctamente" do
@@ -116,7 +115,7 @@ describe Matriz do
     end
 #####################################################################
     describe "Operaciones entre matrices densas y dispersas" do
-      it "Suma de una matriz densa más una dispersa" do
+      it "Suma de una matriz densa mas una dispersa" do
 	(@f3 + @f2).should eq (MatrizDensa.new(10,10,[[0,6,2,9,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
@@ -127,7 +126,7 @@ describe Matriz do
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9]]))
 	end
-       it "Suma de una matriz dispersa más una densa" do
+       it "Suma de una matriz dispersa mas una densa" do
 	(@f2 + @f3).should eq (MatrizDensa.new(10,10,[[0,6,2,9,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
@@ -160,12 +159,12 @@ describe Matriz do
 				  [0,-1,-2,-3,-4,-5,-6,-7,-8,-9]]))
 	                                              
 	end
-	it "Multiplicación de una matriz densa por una dispersa" do
+	it "Multiplicacion de una matriz densa por una dispersa" do
 	 f = MatrizDensa.new(2,2,[[3,4],[5,6]])
 	 k = MatrizDispersa.new(2,2,{1=>{0=>1/2}})                    
 	 (f*k).should eq(MatrizDensa.new(2,2,[[3,4],[11/2,6]]))                     
 	end
-	it "Multiplicación de una matriz dispersa por una densa" do
+	it "Multiplicacion de una matriz dispersa por una densa" do
 	 f = MatrizDensa.new(2,2,[[3,4],[5,6]])
 	 k = MatrizDispersa.new(2,2,{1=>{0=>1/2}})                    
 	 (k*f).should eq(MatrizDensa.new(2,2,[[0,0],[3/2,2]]))                                           
