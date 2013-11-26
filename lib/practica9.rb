@@ -107,8 +107,8 @@ module Practica9
 
       def maximo
          mayor = @elementos[0][0]
-         @columnas.times do |i|
-            @filas.times do |j|
+         @filas.times do |i|
+            @columnas.times do |j|
                mayor = @elementos[i][j] if @elementos[i][j] > mayor
             end
          end
@@ -117,8 +117,8 @@ module Practica9
       
       def minimo
          menor = @elementos[0][0]
-         @columnas.times do |i|
-            @filas.times do |j|
+         @filas.times do |i|
+            @columnas.times do |j|
                menor = @elementos[i][j] if @elementos[i][j] < menor
             end
          end
@@ -243,10 +243,11 @@ module Practica9
       end
 
       def maximo
-         tmp = @elementos.claves
-         tmp1 = tmp[0]
-         tmp2 = @elementos[tmp1].valors
-         mayor = tmp2[0]
+        tmp = @elementos.keys
+        tmp1 = tmp[0]
+        tmp2 = @elementos[tmp1].keys
+	tmp3 = tmp2[0]
+         mayor = at(tmp1,tmp3)
          @elementos.each do |clave, valor|
             valor.each do |clave2, valor2|
                if at(clave,clave2) > mayor
@@ -258,10 +259,11 @@ module Practica9
       end
       
       def minimo
-         tmp = @elementos.claves
-         tmp1 = tmp[0]
-         tmp2 = @elementos[tmp1].valors
-         menor = tmp2[0]
+        tmp = @elementos.keys
+        tmp1 = tmp[0]
+        tmp2 = @elementos[tmp1].keys
+	tmp3 = tmp2[0]
+         menor = at(tmp1,tmp3)
          @elementos.each do |clave, valor|
             valor.each do |clave2, valor2|
                if at(clave,clave2) < menor

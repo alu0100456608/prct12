@@ -13,6 +13,7 @@ describe "Matriz" do
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
+                                  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9]])
       
    end
@@ -107,10 +108,10 @@ describe "Matriz" do
    end
    describe "Maximo y minimo de una matriz dispersa" do
       it"El maximo de una matriz dispersa se realiza correctamente" do
-        @f2.max.should eq (6)
+        @f2.maximo.should eq (6)
       end
       it"El minimo de una matriz dispersa se realiza correctamente" do
-        @f2.min.should eq (5)
+        @f2.minimo.should eq (5)
       end
     end
 #####################################################################
@@ -124,6 +125,7 @@ describe "Matriz" do
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
+	                          [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9]]))
 	end
        it "Suma de una matriz dispersa mas una densa" do
@@ -135,10 +137,11 @@ describe "Matriz" do
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
+	                          [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9]]))
 	end
 	it "Resta de una matriz densa menos una dispersa" do
-	(@f3 + @f2).should eq (MatrizDensa.new(10,10,[[0,-4,2,-3,4,5,6,7,8,9],
+	(@f3 - @f2).should eq (MatrizDensa.new(10,10,[[0,-4,2,-3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
@@ -146,10 +149,13 @@ describe "Matriz" do
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
 				  [0,1,2,3,4,5,6,7,8,9],
+	                          [0,1,2,3,4,5,6,7,8,9],                    
 				  [0,1,2,3,4,5,6,7,8,9]]))
 	end
        it "Resta de una matriz dispersa menos una densa" do
-	(@f2 + @f3).should eq (MatrizDensa.new(10,10,[[0,4,-2,3,-4,-5,-6,-7,-8,-9],
+	(@f2 - @f3).should eq (MatrizDensa.new(10,10,[[0,4,-2,3,-4,-5,-6,-7,-8,-9],
+				  [0,-1,-2,-3,-4,-5,-6,-7,-8,-9],
+				  [0,-1,-2,-3,-4,-5,-6,-7,-8,-9],
 				  [0,-1,-2,-3,-4,-5,-6,-7,-8,-9],
 				  [0,-1,-2,-3,-4,-5,-6,-7,-8,-9],
 				  [0,-1,-2,-3,-4,-5,-6,-7,-8,-9],
@@ -160,14 +166,14 @@ describe "Matriz" do
 	                                              
 	end
 	it "Multiplicacion de una matriz densa por una dispersa" do
-	 f = MatrizDensa.new(2,2,[[3,4],[5,6]])
-	 k = MatrizDispersa.new(2,2,{1=>{0=>1/2}})                    
-	 (f*k).should eq(MatrizDensa.new(2,2,[[3,4],[11/2,6]]))                     
+	 f = MatrizDensa.new(3,3,[[2,4,5],[7,6,1],[2,4,6]])
+	 k = MatrizDispersa.new(3,3,{0=>{2=>3}})                    
+	 (f*k).should eq(MatrizDensa.new(3,3,[[0,0,6],[0,0,21],[0,0,6]]))              
 	end
 	it "Multiplicacion de una matriz dispersa por una densa" do
-	 f = MatrizDensa.new(2,2,[[3,4],[5,6]])
-	 k = MatrizDispersa.new(2,2,{1=>{0=>1/2}})                    
-	 (k*f).should eq(MatrizDensa.new(2,2,[[0,0],[3/2,2]]))                                           
+	 f = MatrizDensa.new(3,3,[[2,4,5],[7,6,1],[2,4,6]])
+	 k = MatrizDispersa.new(3,3,{0=>{2=>3}})                    
+	 (k*f).should eq(MatrizDensa.new(3,3,[[6,12,18],[0,0,0],[0,0,0]]))      
 	end                      
     end
 end
