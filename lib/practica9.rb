@@ -188,15 +188,14 @@ module Practica9
                new_mat << fila
             end
             MatrizDensa.new(@filas, @columnas, new_mat)
-         elsif other.class == MatrizDispersa
-            new_mat = @elementos.merge(other.elementos) do |clave, oldval, newval| 
-               oldval.merge(newval) do |clave2, oldval2, newval2|
-                  oldval2 = 0 if oldval2 == nil
-                  newval2 = 0 if newval2 == nil
-                  oldval2 - newval2
-               end
-            end
-            MatrizDispersa.new(@filas, @columnas, new_mat)
+       elsif other.class == MatrizDispersa
+	   for i in other.elementos.keys
+	     for j in other.elementos[i].keys
+	       val =  other.elementos[i][j]
+	       other.elementos[i][j] = -val
+	     end
+	   end
+	   other.+(self)
          else
             raise TypeError.new("No se puede coaccionar #{other.inspect} a Matriz")
          end
