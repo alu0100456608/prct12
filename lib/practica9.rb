@@ -188,14 +188,13 @@ module Practica9
                new_mat << fila
             end
             MatrizDensa.new(@filas, @columnas, new_mat)
-       elsif other.class == MatrizDispersa
-	   for i in other.elementos.keys
-	     for j in other.elementos[i].keys
-	       val =  other.elementos[i][j]
-	       other.elementos[i][j] = -val
-	     end
-	   end
-	   other.+(self)
+         elsif other.class == MatrizDispersa
+            other.elementos.each do |i, val|
+               val.each do |j, val2|
+                  other.elementos[i][j] = -val2
+               end
+            end
+            other.+(self)
          else
             raise TypeError.new("No se puede coaccionar #{other.inspect} a Matriz")
          end
@@ -242,10 +241,10 @@ module Practica9
       end
 
       def maximo
-        tmp = @elementos.keys
-        tmp1 = tmp[0]
-        tmp2 = @elementos[tmp1].keys
-	tmp3 = tmp2[0]
+         tmp = @elementos.keys
+         tmp1 = tmp[0]
+         tmp2 = @elementos[tmp1].keys
+         tmp3 = tmp2[0]
          mayor = at(tmp1,tmp3)
          @elementos.each do |clave, valor|
             valor.each do |clave2, valor2|
@@ -258,10 +257,10 @@ module Practica9
       end
       
       def minimo
-        tmp = @elementos.keys
-        tmp1 = tmp[0]
-        tmp2 = @elementos[tmp1].keys
-	tmp3 = tmp2[0]
+         tmp = @elementos.keys
+         tmp1 = tmp[0]
+         tmp2 = @elementos[tmp1].keys
+         tmp3 = tmp2[0]
          menor = at(tmp1,tmp3)
          @elementos.each do |clave, valor|
             valor.each do |clave2, valor2|
