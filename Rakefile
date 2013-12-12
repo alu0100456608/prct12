@@ -22,5 +22,9 @@ task :thtml do
 end
 
 task :rspec do
-sh "spec"
+   sh "spec"
+end
+
+task :do_dsl do
+   sh "ruby -Ilib lib/do_dsl.rb lib/prueba.rb"
 end
